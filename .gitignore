@@ -1,2 +1,5 @@
 #virtualenv dir
 TTT
+
+__pycache__
+.DS_Store

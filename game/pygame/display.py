@@ -1,5 +1,4 @@
-import pygame, sys,os
-from pygame.locals import *
+import pygame
 from .board import Board
 
 
@@ -15,12 +14,10 @@ class UIDisplay:
   def draw(self):
     self.board.draw()
     pygame.display.update()
-    self.handle_input(pygame.event.get())
 
+  def input(self, x, y, current_player): # here it's a raw mouse input (x & y are screen coordinates)
+    print("x: ", x, "y: ", y)
+    board_x = int(x / 200)
+    board_y = int(y / 200)
+    self.board.move(board_x, board_y, current_player)
 
-  def handle_input(self, events):
-    for event in events:
-      if event.type == QUIT:
-        sys.exit(0)
-      else:
-        print(event)

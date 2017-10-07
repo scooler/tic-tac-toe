@@ -1,21 +1,28 @@
 
-from .pygame.display import UIDisplay
+# from .pygame.display import UIDisplay
+from .asci.display import ASCIDisplay
 from pygame.locals import *
 import pygame, sys,os
 
 class Game:
   def __init__(self):
-    self.display = UIDisplay()
+    # self.display = UIDisplay()
+    self.display = ASCIDisplay()
     self.current_player = 1
 
   def start(self):
     self.game_loop()
-    pygame.event.set_grab(True)
 
   def game_loop(self):
     while True:
       self.display.draw()
-      self.handle_input()
+      self.handle_input2()
+
+  def handle_input2(self):
+    key = input("use keys 1-9 for fields 1|2|3 etc\n>")
+    self.display.input_key(int(key) - 1, self.current_player)
+    self.switch_player()
+
 
 
   def handle_input(self):

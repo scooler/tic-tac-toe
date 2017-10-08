@@ -1,5 +1,6 @@
 import numpy as np
 from game.displays.null_display import NullDisplay
+from game.displays.asci_display import ASCIDisplay
 
 """The simple rule AI - if oponent has 2 in a row - block it"""
 class RulePlayerV1:
@@ -48,4 +49,5 @@ class RulePlayerV1:
     return False
 
   def display_class(self):
-    return NullDisplay
+    return ASCIDisplay
+    # return NullDisplay

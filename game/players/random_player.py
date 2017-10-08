@@ -1,5 +1,6 @@
 import numpy as np
 from game.displays.null_display import NullDisplay
+from game.displays.asci_display import ASCIDisplay
 
 class RandomPlayer:
   def __init__(self, player_no):
@@ -12,4 +13,5 @@ class RandomPlayer:
     return zipped[0]
 
   def display_class(self):
-    return NullDisplay
+    return ASCIDisplay
+    # return NullDisplay

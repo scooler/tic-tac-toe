@@ -24,9 +24,26 @@ class Board:
       print(line)
       if i < 2:
         print("------")
+    print('Finished?:', self.is_finished())
 
   def move(self, x, y, current_player): # x & y are here 0-2 (board array indexs)
     self.board[x, y] = current_player
-    print(self.board)
 
+
+  def are_same_and_non_zero(self, array):
+    return np.unique(array).size == 1 and array[0] != 0
+
+  def is_board_full(self):
+    return not np.any(np.unique(self.board) == 0)
+
+  def is_finished(self):
+    for i in range(0, 3):
+      if self.are_same_and_non_zero(self.board[i, :]): return True # rows
+      if self.are_same_and_non_zero(self.board[:, i]): return True # columns
+    if self.are_same_and_non_zero(np.diag(self.board)): return True # diagonal
+    if self.are_same_and_non_zero(np.diag(np.flipud(self.board))): return True # anty-diagonal
+
+    if self.is_board_full(): return True # draw
+
+    return False
 

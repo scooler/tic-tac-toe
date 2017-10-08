@@ -38,6 +38,8 @@ class RulePlayerV1:
     return zipped[0]
 
   def two_in_a_row(self, row):
+    row = row.copy()
+    row.sort()
     if row[0] == 0 and row[1] == self.other_player and row[2] == self.other_player: return True
     return False
 

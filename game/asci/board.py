@@ -28,12 +28,6 @@ class Board:
         print("------")
     if self.is_finished(): print(self.result)
 
-  def input_key(self, key, current_player):
-    print("key: ", key)
-    board_y = key % 3
-    board_x = int(key / 3)
-    self.move(board_x, board_y, current_player)
-
   def move(self, x, y, current_player): # x & y are here 0-2 (board array indexs)
     self.board[x, y] = current_player
 

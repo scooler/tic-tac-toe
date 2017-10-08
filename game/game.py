@@ -1,6 +1,6 @@
 
-# from .pygame.display import UIDisplay
-from .asci.board import Board
+from .displays.asci_display import ASCIDisplay
+from .board import Board
 from pygame.locals import *
 import pygame, sys,os
 from .players.human_player import HumanPlayer
@@ -10,6 +10,7 @@ class Game:
   def __init__(self):
     # self.display = UIDisplay()
     self.board = Board()
+    self.display = ASCIDisplay(self.board)
     self.select_game_type()
     self.current_player = 1
 
@@ -28,15 +29,18 @@ class Game:
 
   def start(self):
     self.game_loop()
+    self.finish()
 
   def game_loop(self):
     while not self.board.is_finished():
-      self.board.draw()
+      self.display.draw()
       self.board.show_player_info(self.current_player)
       self.handle_input()
       self.switch_player()
 
-    self.board.draw()
+  def finish(self):
+    self.display.draw()
+    self.display.show_results()
 
   def handle_input(self):
     coords = self.players[self.current_player - 1].get_input(self.board.board)

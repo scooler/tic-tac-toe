@@ -1,4 +1,5 @@
 import numpy as np
+
 class RandomPlayer:
   def get_input(self, board):
     empty_indexes = np.where(board == 0)

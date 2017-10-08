@@ -10,8 +10,21 @@ class Game:
   def __init__(self):
     # self.display = UIDisplay()
     self.board = Board()
-    self.players = [HumanPlayer(), RandomPlayer()]
+    self.select_game_type()
     self.current_player = 1
+
+  def select_game_type(self):
+    game_type = input('What game type? H = Human, R = Random (so HH is PvP)')
+    game_type = game_type.upper()
+    players = []
+    for i in range(0, 2):
+      if game_type[i] == 'H':
+        players.append(HumanPlayer())
+      else:
+        if game_type[i] == 'R':
+          players.append(RandomPlayer())
+
+    self.players = players
 
   def start(self):
     self.game_loop()

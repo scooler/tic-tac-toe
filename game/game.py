@@ -5,6 +5,7 @@ from .board import Board
 from pygame.locals import *
 import pygame, sys,os
 from .players.human_player import ConsolePlayer
+from .players.human_player import PygamePlayer
 from .players.random_player import RandomPlayer
 
 class Game:
@@ -25,6 +26,9 @@ class Game:
       else:
         if game_type[i] == 'R':
           players.append(RandomPlayer(i))
+        else:
+          if game_type[i] == 'P':
+            players.append(PygamePlayer(i))
 
     self.players = players
 

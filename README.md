@@ -12,3 +12,12 @@ To run
 ```
 python main.py
 ```
+
+There are at this point a couple Displays supported (ASCI, Pygame, Null - file is coming)
+And some "input strategy" - console/numeric keyboard, mouse on UI, Random pick, Basic Rule-based AI
+
+Those are in oder:
+- 'C' (console, ASCI)
+- 'P' (pygame)
+- 'R' (Random)
+- '1' (AI v1)

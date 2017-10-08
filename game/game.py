@@ -10,7 +10,7 @@ from .players.random_player import RandomPlayer
 from .players.rule_player import RulePlayerV1
 
 GAME_TYPES = {
-  'H': ConsolePlayer,
+  'C': ConsolePlayer,
   'R': RandomPlayer,
   'P': PygamePlayer,
   '1': RulePlayerV1
@@ -25,7 +25,7 @@ class Game:
     self.current_player = 1
 
   def select_game_type(self):
-    game_type = input('What game type? H = Human, R = Random (so HH is PvP)')
+    game_type = input('What game type? C (console), P(pygame), R(random), 1(AI v1) (so HH is PvP in console)')
     game_type = game_type.upper()
     players = []
     for i in range(0, 2):

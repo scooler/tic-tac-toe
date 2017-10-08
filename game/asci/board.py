@@ -1,10 +1,12 @@
 import numpy as np
+import os
 
 class Board:
   def __init__(self):
     self.board = np.zeros((3, 3), dtype=np.int8)
 
   def draw(self):
+    os.system('clear')
     self.draw_board()
 
   def draw_board(self):
@@ -24,7 +26,13 @@ class Board:
       print(line)
       if i < 2:
         print("------")
-    print('Finished?:', self.is_finished())
+    if self.is_finished(): print(self.result)
+
+  def input_key(self, key, current_player):
+    print("key: ", key)
+    board_y = key % 3
+    board_x = int(key / 3)
+    self.move(board_x, board_y, current_player)
 
   def move(self, x, y, current_player): # x & y are here 0-2 (board array indexs)
     self.board[x, y] = current_player
@@ -38,12 +46,25 @@ class Board:
 
   def is_finished(self):
     for i in range(0, 3):
-      if self.are_same_and_non_zero(self.board[i, :]): return True # rows
-      if self.are_same_and_non_zero(self.board[:, i]): return True # columns
-    if self.are_same_and_non_zero(np.diag(self.board)): return True # diagonal
-    if self.are_same_and_non_zero(np.diag(np.flipud(self.board))): return True # anty-diagonal
+      if self.are_same_and_non_zero(self.board[i, :]):
+        self.result = 'Won {} - row {}'.format(self.player(self.board[i, 0]), i)
+        return True # rows
+      if self.are_same_and_non_zero(self.board[:, i]):
+        self.result = 'Won {} - col {}'.format(self.player(self.board[i, 0]), i)
+        return True # columns
+    if self.are_same_and_non_zero(np.diag(self.board)):
+      self.result = 'Won {} - diagonal {}'.format(self.player(self.board[i, 0]), i)
+      return True # diagonal
+    if self.are_same_and_non_zero(np.diag(np.flipud(self.board))):
+      self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.board[i, 0]), i)
+      return True # anty-diagonal
 
-    if self.is_board_full(): return True # draw
+    if self.is_board_full():
+      self.result = 'Draw'
+      return True # draw
 
     return False
 
+  def player(self, player_no):
+    if player_no == 1: return 'Player 1 (X)'
+    if player_no == 2: return 'Player 2 (O)'

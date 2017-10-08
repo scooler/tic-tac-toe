@@ -29,7 +29,7 @@ class Game:
     game_type = game_type.upper()
     players = []
     for i in range(0, 2):
-      players.append(GAME_TYPES[game_type[i]](i))
+      players.append(GAME_TYPES[game_type[i]](i + 1))
 
     self.players = players
 

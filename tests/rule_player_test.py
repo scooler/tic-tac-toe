@@ -27,3 +27,18 @@ class RulePlayerTest(unittest.TestCase):
     self.assertEqual(False, player.two_in_a_row(np.array([2, 1, 0])))
     self.assertEqual(False, player.two_in_a_row(np.array([1, 0, 2])))
     self.assertEqual(False, player.two_in_a_row(np.array([2, 0, 1])))
+
+  def test_get_input_rows(self):
+    player = RulePlayerV1(1)
+    board = np.zeros((3, 3))
+    board[1, 0] = 2
+    board[2, 0] = 2
+    self.assertEqual([0, 0], player.get_input(board))
+
+  def test_get_input_cols(self):
+    player = RulePlayerV1(1)
+    board = np.zeros((3, 3))
+    board[0, 0] = 2
+    board[0, 1] = 2
+    self.assertEqual([0, 2], player.get_input(board))
+

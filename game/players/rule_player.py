@@ -13,22 +13,26 @@ class RulePlayerV1:
   def get_input(self, board):
     for i in range(0, board.shape[0]):                     # rows
       if self.two_in_a_row(board[i, :]):
-        y = np.where(board[i, :])
+        # print('Found two in row ', i)
+        y = np.where(board[i, :] == 0)[0][0]
         return [i, y]
 
     for i in range(0, board.shape[1]):                     # columns
       if self.two_in_a_row(board[:, i]):
-        x = np.where(board[:, i])
+        # print('Found two in col ', i)
+        x = np.where(board[:, i] == 0)[0][0]
         return [x, i]
 
     if self.two_in_a_row(np.diag(board)): # diagonal
-      diag_pos = np.where(np.diag(board))
+      # print('Found two on diag ')
+      diag_pos = np.where(np.diag(board) == 0)[0][0]
       return [diag_pos, diag_pos]
 
     if self.two_in_a_row(np.diag(np.flipud(board))): # anty-diagonal
-      anyy_diag_pos = np.where(np.diag(np.flipud(board)))
+      # print('Found two on anty-diag ')
+      anyy_diag_pos = np.where(np.diag(np.flipud(board)) == 0)[0][0]
       return [board.shape[0] - 1 - anty_diag_pos, anty_diag_pos]
-
+    # print('not found - falling back to random')
     return self.random_input(board)
 
   def random_input(self, board):

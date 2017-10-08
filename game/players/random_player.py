@@ -1,6 +1,9 @@
 import numpy as np
 
 class RandomPlayer:
+  def __init__(self, player_no):
+    self.player_no = player_no
+
   def get_input(self, board):
     empty_indexes = np.where(board == 0)
     zipped = np.column_stack(empty_indexes)

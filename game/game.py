@@ -19,10 +19,10 @@ class Game:
     players = []
     for i in range(0, 2):
       if game_type[i] == 'H':
-        players.append(HumanPlayer())
+        players.append(HumanPlayer(i))
       else:
         if game_type[i] == 'R':
-          players.append(RandomPlayer())
+          players.append(RandomPlayer(i))
 
     self.players = players
 
@@ -32,6 +32,7 @@ class Game:
   def game_loop(self):
     while not self.board.is_finished():
       self.board.draw()
+      self.board.show_player_info(self.current_player)
       self.handle_input()
       self.switch_player()
 

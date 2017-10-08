@@ -1,4 +1,7 @@
 class HumanPlayer:
+  def __init__(self, player_no):
+    self.player_no = player_no
+
   def get_input(self, board):
     key = input("use keys 1-9 for fields 1|2|3 etc\n>")
     key = int(key) - 1

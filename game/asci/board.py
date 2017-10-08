@@ -62,3 +62,6 @@ class Board:
   def player(self, player_no):
     if player_no == 1: return 'Player 1 (X)'
     if player_no == 2: return 'Player 2 (O)'
+
+  def show_player_info(self, player_no):
+    print("It's turn of ", self.player(player_no))

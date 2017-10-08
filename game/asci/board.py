@@ -44,13 +44,13 @@ class Board:
         self.result = 'Won {} - row {}'.format(self.player(self.board[i, 0]), i)
         return True # rows
       if self.are_same_and_non_zero(self.board[:, i]):
-        self.result = 'Won {} - col {}'.format(self.player(self.board[i, 0]), i)
+        self.result = 'Won {} - col {}'.format(self.player(self.board[0, i]), i)
         return True # columns
     if self.are_same_and_non_zero(np.diag(self.board)):
-      self.result = 'Won {} - diagonal {}'.format(self.player(self.board[i, 0]), i)
+      self.result = 'Won {} - diagonal {}'.format(self.player(self.board[1, 1]), i)
       return True # diagonal
     if self.are_same_and_non_zero(np.diag(np.flipud(self.board))):
-      self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.board[i, 0]), i)
+      self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.board[1, 1]), i)
       return True # anty-diagonal
 
     if self.is_board_full():

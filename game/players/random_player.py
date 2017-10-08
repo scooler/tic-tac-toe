@@ -1,4 +1,5 @@
 import numpy as np
+from game.displays.null_display import NullDisplay
 
 class RandomPlayer:
   def __init__(self, player_no):
@@ -9,3 +10,6 @@ class RandomPlayer:
     zipped = np.column_stack(empty_indexes)
     np.random.shuffle(zipped)
     return zipped[0]
+
+  def display_class(self):
+    return NullDisplay

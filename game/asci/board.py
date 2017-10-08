@@ -2,17 +2,19 @@ import numpy as np
 import os
 
 class Board:
-  def __init__(self):
-    self.board = np.zeros((3, 3), dtype=np.int8)
+  def __init__(self, size=(3, 3)):
+    self.board = np.zeros(size, dtype=np.int8)
+    self.x_size = self.board.shape[0]
+    self.y_size = self.board.shape[1]
 
   def draw(self):
     os.system('clear')
     self.draw_board()
 
   def draw_board(self):
-    for i in range(0, 3):
+    for i in range(0, self.x_size):
       line = ''
-      for j in range(0, 3):
+      for j in range(0, self.y_size):
         if self.board[i, j] == 0:
           line += ' '
         if self.board[i, j] == 1:
@@ -20,15 +22,15 @@ class Board:
         if self.board[i, j] == 2:
           line += 'O'
 
-        if j < 2:
+        if j < self.y_size - 1:
           line += '|'
 
       print(line)
-      if i < 2:
+      if i < self.x_size - 1:
         print("------")
     if self.is_finished(): print(self.result)
 
-  def move(self, x, y, current_player): # x & y are here 0-2 (board array indexs)
+  def move(self, x, y, current_player):
     self.board[x, y] = current_player
 
 
@@ -39,19 +41,23 @@ class Board:
     return not np.any(np.unique(self.board) == 0)
 
   def is_finished(self):
-    for i in range(0, 3):
+    for i in range(0, self.x_size):                     # rows
       if self.are_same_and_non_zero(self.board[i, :]):
         self.result = 'Won {} - row {}'.format(self.player(self.board[i, 0]), i)
-        return True # rows
+        return True
+
+    for i in range(0, self.y_size):                     # columns
       if self.are_same_and_non_zero(self.board[:, i]):
         self.result = 'Won {} - col {}'.format(self.player(self.board[0, i]), i)
-        return True # columns
-    if self.are_same_and_non_zero(np.diag(self.board)):
+        return True
+
+    if self.are_same_and_non_zero(np.diag(self.board)): # diagonal
       self.result = 'Won {} - diagonal {}'.format(self.player(self.board[1, 1]), i)
-      return True # diagonal
-    if self.are_same_and_non_zero(np.diag(np.flipud(self.board))):
+      return True
+
+    if self.are_same_and_non_zero(np.diag(np.flipud(self.board))): # anty-diagonal
       self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.board[1, 1]), i)
-      return True # anty-diagonal
+      return True
 
     if self.is_board_full():
       self.result = 'Draw'

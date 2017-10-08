@@ -30,7 +30,7 @@ class RulePlayerV1:
 
     if self.two_in_a_row(np.diag(np.flipud(board))): # anty-diagonal
       # print('Found two on anty-diag ')
-      anyy_diag_pos = np.where(np.diag(np.flipud(board)) == 0)[0][0]
+      anty_diag_pos = np.where(np.diag(np.flipud(board)) == 0)[0][0]
       return [board.shape[0] - 1 - anty_diag_pos, anty_diag_pos]
     # print('not found - falling back to random')
     return self.random_input(board)

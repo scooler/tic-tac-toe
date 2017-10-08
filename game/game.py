@@ -7,6 +7,14 @@ import pygame, sys,os
 from .players.human_player import ConsolePlayer
 from .players.human_player import PygamePlayer
 from .players.random_player import RandomPlayer
+from .players.rule_player import RulePlayerV1
+
+GAME_TYPES = {
+  'H': ConsolePlayer,
+  'R': RandomPlayer,
+  'P': PygamePlayer,
+  '1': RulePlayerV1
+}
 
 class Game:
   def __init__(self):
@@ -21,14 +29,7 @@ class Game:
     game_type = game_type.upper()
     players = []
     for i in range(0, 2):
-      if game_type[i] == 'H':
-        players.append(ConsolePlayer(i))
-      else:
-        if game_type[i] == 'R':
-          players.append(RandomPlayer(i))
-        else:
-          if game_type[i] == 'P':
-            players.append(PygamePlayer(i))
+      players.append(GAME_TYPES[game_type[i]](i))
 
     self.players = players
 

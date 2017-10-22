@@ -13,6 +13,11 @@ To run
 python main.py
 ```
 
+To gather stats (multiple runs and compare - best works for auto players)
+```
+python stats.py
+```
+
 There are at this point a couple Displays supported (ASCI, Pygame, Null - file is coming)
 And some "input strategy" - console/numeric keyboard, mouse on UI, Random pick, Basic Rule-based AI
 

@@ -24,15 +24,22 @@ class Game:
   def __init__(self, output_enabled = True):
     self.output_enabled = output_enabled
     self.select_game_type()
+    self.reversed = False
+    self.init_players()
     self.reset() # I thought about calling it setup, but I'd setup it later multiple times :(
 
   def select_game_type(self):
     game_type = input('What game type? C (console), P(pygame), R(random), 1(AI v1), 2(AI v2) (so HH is PvP in console)')
     game_type = game_type.upper()
+    player_classes = []
+    for i in range(0, 2):
+      player_classes.append(GAME_TYPES[game_type[i]])
+    self.player_classes = player_classes
+
+  def init_players(self):
     players = []
     for i in range(0, 2):
-      players.append(GAME_TYPES[game_type[i]](i + 1))
-
+      players.append(self.player_classes[i](i + 1))
     self.players = players
 
   def setup_displays(self):
@@ -76,11 +83,16 @@ class Game:
 
     self.current_player = 1
 
+  def reverse_players(self):
+    self.player_classes = [self.player_classes[1], self.player_classes[0]]
+    # player_classes = [self.player_classes[0], self.player_classes[1]]
+    self.init_players()
+    self.reversed = not self.reversed
 
 class GameStats:
   def __init__(self):
     self.game = Game(False)
-    self.repeats = 100
+    self.repeats = 1000
     self.winning_players = []
 
   def run(self):
@@ -90,7 +102,14 @@ class GameStats:
   def run_games(self):
     for i in range(0, self.repeats):
       self.game.game_loop()
-      self.winning_players.append(self.game.board.player_who_won)
+      if self.game.reversed:
+        who_won = self.game.board.player_who_won
+        if who_won == 1: self.winning_players.append(2)
+        if who_won == 2: self.winning_players.append(1)
+        if who_won == 0: self.winning_players.append(0)
+      else:
+        self.winning_players.append(self.game.board.player_who_won)
+      self.game.reverse_players()
       self.game.reset()
 
   def show_stats(self):
@@ -102,4 +121,3 @@ class GameStats:
     p2_win_percantage = p2_won/(p1_won+p2_won)*100
 
     print("Player 1 won ", p1_won, " times, Player 2 won ", p2_won, " times - so ", p1_win_percantage, "/", p2_win_percantage," - ", draws, " Draws")
-

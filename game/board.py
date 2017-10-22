@@ -20,23 +20,29 @@ class Board:
   def is_finished(self):
     for i in range(0, self.x_size):                     # rows
       if self.are_same_and_non_zero(self.board[i, :]):
-        self.result = 'Won {} - row {}'.format(self.player(self.board[i, 0]), i)
+        self.player_who_won = self.board[i, 0]
+        self.result = 'Won {} - row {}'.format(self.player(self.player_who_won), i)
         return True
 
     for i in range(0, self.y_size):                     # columns
       if self.are_same_and_non_zero(self.board[:, i]):
-        self.result = 'Won {} - col {}'.format(self.player(self.board[0, i]), i)
+        self.player_who_won = self.board[0, i]
+        self.result = 'Won {} - col {}'.format(self.player(self.player_who_won), i)
         return True
 
     if self.are_same_and_non_zero(np.diag(self.board)): # diagonal
-      self.result = 'Won {} - diagonal {}'.format(self.player(self.board[1, 1]), i)
+      self.player_who_won = self.board[1, 1]
+      self.result = 'Won {} - diagonal {}'.format(self.player(self.player_who_won), i)
       return True
 
     if self.are_same_and_non_zero(np.diag(np.flipud(self.board))): # anty-diagonal
-      self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.board[1, 1]), i)
+      self.player_who_won = self.board[1, 1]
+      self.result = 'Won {} - anty-diagonal {}'.format(self.player(self.player_who_won), i)
+
       return True
 
     if self.is_board_full():
+      self.player_who_won = 0 # nobody
       self.result = 'Draw'
       return True # draw
 

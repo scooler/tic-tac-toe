@@ -25,4 +25,5 @@ Those are in oder:
 - 'C' (console, ASCI)
 - 'P' (pygame)
 - 'R' (Random)
-- '1' (AI v1)
+- '1' (AI v1) - rule based, just to prevent oponent from wining + fallback to random
+- '2' (AI v2) - rule based - win if you can, otherwise fallback to v1

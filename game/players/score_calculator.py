@@ -14,11 +14,14 @@ class ScoreCalculator:
     return self.current_score
 
   def add_players_pairs(self, player):
-    pairs_count = self.find_pairs_count(player)
-    self.current_score += pairs_count
+    self.current_score += self.find_pairs_count(player)
 
   def substract_oponents_pairs(self, player):
-    pass
+    if player == 1:
+      oponent = 2
+    else:
+      oponent = 1
+    self.current_score -= self.find_pairs_count(oponent)
 
   def add_wining_condition(self, player):
     pass

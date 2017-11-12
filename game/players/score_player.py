@@ -13,7 +13,9 @@ class ScorePlayer:
     for i in range(0, board.shape[0]):
       for j in range(0, board.shape[1]):
         if board[i, j] == 0:
-          score = ScoreCalculator(board.copy()).score_for_player(self.player_no)
+          cboard = board.copy()
+          cboard[i, j] = self.player_no # WHAT IF I'd make a move here ;)
+          score = ScoreCalculator(cboard).score_for_player(self.player_no)
           if score > best_score:
             best_move = [i, j]
             best_score = score

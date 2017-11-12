@@ -50,3 +50,18 @@ class ScoreCalculatorTest(unittest.TestCase):
     board[1,1] = 2
     board[2,2] = 2
     self.assertEqual(-100, ScoreCalculator(board).score_for_player(1))
+
+  def test_score_for_complex_board(self):
+    board = np.array([ # oponent has an unblocked pair (-1), my pair is blocked (0)
+      [2, 0, 0],
+      [1, 2, 0],
+      [1, 0, 0]
+    ])
+    self.assertEqual(-1, ScoreCalculator(board).score_for_player(1))
+
+    board = np.array([ # I block oponent's pair (0), and have a pair (1)
+      [2, 0, 0],
+      [0, 2, 0],
+      [1, 0, 1]
+    ])
+    self.assertEqual(1, ScoreCalculator(board).score_for_player(1))

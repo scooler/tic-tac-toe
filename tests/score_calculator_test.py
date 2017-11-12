@@ -37,3 +37,16 @@ class ScoreCalculatorTest(unittest.TestCase):
     self.assertEqual(0, ScoreCalculator(board).score_for_player(1))
     self.assertEqual(0, ScoreCalculator(board).score_for_player(2))
 
+  def test_score_counts_winning(self):
+    board = empty_board()
+    board[0,0] = 1
+    board[1,1] = 1
+    board[2,2] = 1
+    self.assertEqual(100, ScoreCalculator(board).score_for_player(1))
+
+  def test_score_counts_loosing(self):
+    board = empty_board()
+    board[0,0] = 2
+    board[1,1] = 2
+    board[2,2] = 2
+    self.assertEqual(-100, ScoreCalculator(board).score_for_player(1))

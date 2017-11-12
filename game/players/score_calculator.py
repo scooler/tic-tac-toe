@@ -1,5 +1,7 @@
 import numpy as np
 
+WINNING_SCORE = 100
+
 """An AI helper class that scores the state of the board"""
 class ScoreCalculator:
   def __init__(self, board):
@@ -17,18 +19,13 @@ class ScoreCalculator:
     self.current_score += self.find_pairs_count(player)
 
   def substract_oponents_pairs(self, player):
-    if player == 1:
-      oponent = 2
-    else:
-      oponent = 1
-    self.current_score -= self.find_pairs_count(oponent)
+    self.current_score -= self.find_pairs_count(self.oponent_of_player(player))
 
   def add_wining_condition(self, player):
-    pass
+    if self.is_three_in_row_present(player): self.current_score += WINNING_SCORE
 
   def substract_loosing_condition(self, player):
-    pass
-
+    if self.is_three_in_row_present(self.oponent_of_player(player)): self.current_score -= WINNING_SCORE
 
   def find_pairs_count(self, player):
     pairs_count = 0
@@ -60,9 +57,40 @@ class ScoreCalculator:
 
     return pairs_count
 
+  def is_three_in_row_present(self, player):
+    for i in range(0, self.board.shape[0]):                     # rows
+      if self.three_in_a_row(self.board[i, :], player):
+        # print('Found two in row ', i)
+        return True
+
+    for i in range(0, self.board.shape[1]):                     # columns
+      if self.three_in_a_row(self.board[:, i], player):
+        # print('Found two in col ', i)
+        return True
+
+    if self.three_in_a_row(np.diag(self.board), player): # diagonal
+      # print('Found two on diag ')
+      return True
+      # return [diag_pos, diag_pos]
+
+    if self.three_in_a_row(np.diag(np.flipud(self.board)), player): # anty-diagonal
+      # print('Found two on anty-diag ')
+      return True
+
+    return False
+
+
+  def oponent_of_player(self, player):
+    if player == 1:
+      return 2
+    else:
+      return 1
 
   def two_in_a_row(self, row, player):
     row = row.copy()
     row.sort()
     if row[0] == 0 and row[1] == player and row[2] == player: return True
     return False
+
+  def three_in_a_row(self, row, player):
+    return np.unique(row).size == 1 and row[0] == player

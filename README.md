@@ -27,3 +27,4 @@ Those are in oder:
 - 'R' (Random)
 - '1' (AI v1) - rule based, just to prevent oponent from wining + fallback to random
 - '2' (AI v2) - rule based - win if you can, otherwise fallback to v1
+- '3' (AI v3) - score based - looks 1 step ahead - which step will result in board "most in his favor". 1 for your pair, -1 for oponent's 100 for winning - 100 for loosing

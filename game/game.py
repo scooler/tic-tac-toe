@@ -11,13 +11,15 @@ from .players.human_player import PygamePlayer
 from .players.random_player import RandomPlayer
 from .players.rule_player import RulePlayerV1
 from .players.rule_player import RulePlayerV2
+from .players.score_player import ScorePlayer
 
 GAME_TYPES = {
   'C': ConsolePlayer,
   'R': RandomPlayer,
   'P': PygamePlayer,
   '1': RulePlayerV1,
-  '2': RulePlayerV2
+  '2': RulePlayerV2,
+  '3': ScorePlayer
 }
 
 class Game:
@@ -29,7 +31,7 @@ class Game:
     self.reset() # I thought about calling it setup, but I'd setup it later multiple times :(
 
   def select_game_type(self):
-    game_type = input('What game type? C (console), P(pygame), R(random), 1(AI v1), 2(AI v2) (so HH is PvP in console)')
+    game_type = input('What game type? C (console), P(pygame), R(random), 1-3 (AI v1-v3) (so HH is PvP in console)')
     game_type = game_type.upper()
     player_classes = []
     for i in range(0, 2):

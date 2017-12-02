@@ -28,3 +28,4 @@ Those are in oder:
 - '1' (AI v1) - rule based, just to prevent oponent from wining + fallback to random
 - '2' (AI v2) - rule based - win if you can, otherwise fallback to v1
 - '3' (AI v3) - score based - looks 1 step ahead - which step will result in board "most in his favor". 1 for your pair, -1 for oponent's 100 for winning - 100 for loosing
+- '4' (AI v4) - score based - looks n steps ahead (playing both it's, and oponent's part). Than picks up the move resulting in the best result in the long run

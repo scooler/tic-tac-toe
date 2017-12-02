@@ -1,10 +1,16 @@
 import numpy as np
 
 class Board:
-  def __init__(self, size=(3, 3)):
-    self.board = np.zeros(size, dtype=np.int8)
+  def __init__(self, size = (3, 3), array = None):
+    # if array == None:
+    if array is None:
+      self.board = np.zeros(size, dtype=np.int8)
+    else:
+      self.board = np.array(array, dtype=np.int8)
+
     self.x_size = self.board.shape[0]
     self.y_size = self.board.shape[1]
+    self.player_who_won = None
 
 
   def move(self, x, y, current_player):
